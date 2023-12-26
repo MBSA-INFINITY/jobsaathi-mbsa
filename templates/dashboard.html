@@ -40,13 +40,13 @@
         <div id="chat-messages">
             <!-- Chat messages will be dynamically added here -->
         </div>
-        <input type="text" id="user-input" placeholder="Type your instruction..." style="width: 100%;margin-bottom: 5px;">
+        <textarea type="text" id="user-input" placeholder="Type your instruction..." style="width: 100%;margin-bottom: 5px;"></textarea>
       
         <button onclick="sendMessage()">Send</button>
     </div>
 
     <div id="resume-container">
-        <h2>{{user_name}}'s Resume</h2>
+        <h2>{{user_name}}'s Resume  <a href="/logout">Logout</a></h2>
         <div id="resume-content">
           {{ resume_html_code | safe }}
             
@@ -64,9 +64,9 @@
             userMessage.textContent = `User: ${userInput}`;
             chatMessages.appendChild(userMessage);
       }
-      function createBotMessage(){
+      function createBotMessage(message){
         const botResponse = document.createElement('div');
-            botResponse.textContent = 'BillBot: Done Processing!'; // You can replace this with the actual bot response
+            botResponse.textContent = `BillBot: ${message}`; // You can replace this with the actual bot response
             chatMessages.appendChild(botResponse);
       }
         async function sendMessage() {
@@ -96,7 +96,7 @@
                 // Update the resume content with the HTML response
                 resumeContent.innerHTML = responseData.html;
 
-                createBotMessage()
+                createBotMessage("Done Processing!")
             } catch (error) {
                 console.error('Error:', error);
                 // Handle errors, display a message, etc.
@@ -107,6 +107,7 @@
 
             
         }
+        createBotMessage("Hi. I am BillBot. Beside is your resume. Provide Details of your projects/achievements and other instruction as per your need. I will update the resume accordingly.")
     </script>
 </body>
 </html>
