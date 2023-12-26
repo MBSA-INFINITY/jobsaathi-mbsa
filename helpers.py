@@ -4,7 +4,9 @@ import re
 from langchain.llms import OpenAI
 from langchain import PromptTemplate, LLMChain
 from db import resume_details_collection
-llm = OpenAI(openai_api_key="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",  max_tokens=-1)
+import os
+OPENAIKEY=os.environ['OPENAIKEY']
+llm = OpenAI(openai_api_key=OPENAIKEY,  max_tokens=-1)
 
 template = """You are a chatbot who helps people to build their resume/portfolio. This is the HTML of the portfolio {html}. Analyze the HTML properly.The following statement "{statement}" would be an instruction or information related to skills, achievements, education, projects or any other section in the resume. Analyze the statement and update the HTML code according to statement. You are free to add or remove a section as per the scenario. Make the portfolio attractive in styling. Return me only the HTML Code.
 """
